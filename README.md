@@ -4,5 +4,4 @@ This repository contains the source code for my personal portfolio website. It's
 
 **Live Site:** [under construction]
 
-
 Thank you for visiting my portfolio repository!
