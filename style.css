@@ -208,13 +208,22 @@ a:hover {
 .hero-section h1 {
     font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive font size */
     animation: slideInFromLeft 1s ease-out forwards;
+    margin-bottom: 0.5rem; /* Reduce space below the heading */
 }
 
 .hero-section .subtitle {
     font-size: 1.25rem;
+    font-family: var(--font-family-monospace); /* Use a monospaced font for better typing effect */
+    margin-top: 0; /* Remove default top margin */
     color: var(--text-color);
-    animation: slideInFromLeft 1s ease-out 0.2s forwards; /* 0.2s delay */
-    opacity: 0; /* Start hidden for animation */
+    display: inline-block; /* Necessary for the caret effect */
+    overflow: hidden; /* Ensures the text is not seen before the animation */
+    white-space: nowrap; /* Keeps the content on a single line */
+    border-right: .15em solid var(--primary-color); /* The typing caret */
+    letter-spacing: .1em; /* Adjust as needed */
+    animation: 
+        typing 3.5s steps(40, end) 0.5s forwards,
+        blink-caret .75s step-end 6 forwards; /* Blink 6 times then stop, keeping the final state */
 }
 
 @keyframes slideInFromLeft {
@@ -226,6 +235,18 @@ a:hover {
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--primary-color); }
 }
 
 .content-section {
@@ -259,6 +280,17 @@ a:hover {
     margin-top: 1rem;
 }
 
+.highlight-stat {
+    font-family: var(--font-family-monospace);
+    color: var(--dark-color);
+    font-size: 1.1rem;
+}
+
+.highlight-stat strong {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
 @media (max-width: 768px) {
     .about-content {
         grid-template-columns: 1fr;
@@ -272,6 +304,9 @@ a:hover {
         justify-self: center;
     }
 }
+
+/* --- Unique Section Backgrounds --- */
+#education { background-color: var(--light-color); }
 
 /* --- Education Section --- */
 .education-grid {
@@ -377,6 +412,63 @@ a:hover {
     margin-bottom: 0.5rem;
 }
 
+/* --- Certificates Section --- */
+.certificate-container {
+    margin-top: 2rem;
+}
+
+.certificate-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.certificate-grid-centered {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    width: 66%; /* Approx 2/3 of the container width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.certificate-card {
+    background-color: var(--body-bg);
+    padding: 1.5rem;
+    border-radius: 20px;
+    border: 1px solid var(--light-color);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.certificate-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.certificate-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    color: var(--dark-color);
+}
+
+.certificate-card .btn {
+    margin-top: 1rem;
+}
+
+.certificate-details .issuer {
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+.certificate-content {
+    flex-grow: 1;
+}
+
 /* --- Activity & Skills Section --- */
 .activity-container, .skills-container {
     text-align: center;
@@ -386,15 +478,11 @@ a:hover {
 .activity-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 3rem;
-    margin-top: 2rem;
     flex-wrap: wrap; /* Allows stacking on small screens */
+    justify-content: center; /* Center the items */
+    gap: 3rem; /* Add space between items */
 }
 
-.leetcode-stats {
-    flex-shrink: 0; /* Prevents the image from shrinking */
-}
 
 .leetcode-stats img {
     max-width: 100%;
@@ -402,13 +490,14 @@ a:hover {
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--light-color);
 }
 
 .platform-links {
     text-align: left;
     display: flex;
     flex-direction: column;
+    justify-content: center; /* Vertically center the links */
     gap: 1.5rem;
 }
 
@@ -435,6 +524,7 @@ a:hover {
 }
 
 /* --- Skills Section --- */
+#skills { background-color: var(--light-color); }
 .skills-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -446,7 +536,7 @@ a:hover {
     background-color: var(--body-bg);
     padding: 1.5rem;
     border-radius: 8px;
-    border: 1px solid var(--light-color);
+    border: 1px solid var(--light-color); /* This border will now contrast with the new section background */
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
